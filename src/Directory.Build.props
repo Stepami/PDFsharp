@@ -41,9 +41,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <PackageReference Include="GitVersion.MsBuild">
+  <!--<PackageReference Include="GitVersion.MsBuild">
     <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     <PrivateAssets>all</PrivateAssets>
-  </PackageReference>
+  </PackageReference>-->
   </ItemGroup>
 </Project>
