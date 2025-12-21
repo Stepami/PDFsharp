@@ -3,14 +3,13 @@
 
 using PdfSharp.Drawing;
 using PdfSharp.Fonts.OpenType;
-using PdfSharp.Internal;
 
 namespace PdfSharp.Fonts
 {
     /// <summary>
     /// Global table of OpenType font descriptor objects.
     /// </summary>
-    static class FontDescriptorCache
+    public static class FontDescriptorCache
     {
         /// <summary>
         /// Gets the FontDescriptor identified by the specified XFont. If no such object 
@@ -88,7 +87,7 @@ namespace PdfSharp.Fonts
             finally { Locks.ExitFontFactory(); }
         }
 
-        internal static void Reset()
+        public static void Reset()
         {
             Globals.Global.Fonts.FontDescriptorCache.Clear();
         }
