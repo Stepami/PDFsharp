@@ -59,8 +59,7 @@ namespace PdfSharp.Fonts
 
             //FontSelector1 selector = new FontSelector1(fontFamilyName, style);
             string fontDescriptorKey = FontDescriptor.ComputeFdKey(fontFamilyName, style);
-            var cache = Globals.Global.Fonts.FontDescriptorCache;
-            Locks.EnterFontFactory();
+            var cache = Globals.Global.Fonts.FontDescriptorCacheV2;
             if (!cache.TryGetValue(fontDescriptorKey, out var descriptor))
             {
                 var font = new XFont(fontFamilyName, 10, style);
@@ -69,7 +68,7 @@ namespace PdfSharp.Fonts
                 if (cache.ContainsKey(fontDescriptorKey))
                     _ = typeof(int);  // Just a NOP for a break point.
                 else
-                    cache.Add(fontDescriptorKey, descriptor);
+                    cache.TryAdd(fontDescriptorKey, descriptor);
             }
             return descriptor;
         }
