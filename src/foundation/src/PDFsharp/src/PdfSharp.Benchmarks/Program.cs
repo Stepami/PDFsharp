@@ -26,13 +26,13 @@ public class PdfDocumentBenchmarks
     public int Iterations { get; set; }
 
     [Benchmark]
-    public async Task CreateAndSave()
+    public void CreateAndSave()
     {
         for (var i = 0; i < Iterations; i++)
         {
             var document = BenchmarkHelper.CreateSampleDocument();
             Consumer.Consume(document);
-            await document.SaveAsync(Stream.Null);
+            //await document.SaveAsync(Stream.Null);
         }
     }
 

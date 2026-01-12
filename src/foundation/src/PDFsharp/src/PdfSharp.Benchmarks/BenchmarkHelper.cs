@@ -31,9 +31,7 @@ public static class BenchmarkHelper
             var numbers = Enumerable.Repeat(
                     () => Random.Shared.Next(100, 999), 10)
                 .Select(x => x());
-            var line = string.Join(
-                ", ",
-               );
+            var line = string.Join(", ", numbers);
             gfx.DrawString(
                 line, font, XBrushes.Black,
                 new XRect(0, (i + 1) * 20, page.Width.Point, page.Height.Point),
