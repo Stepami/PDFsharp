@@ -9,7 +9,7 @@ namespace PdfSharp.Fonts
     /// <summary>
     /// Global table of OpenType font descriptor objects.
     /// </summary>
-    public static class FontDescriptorCache
+    static class FontDescriptorCache
     {
         /// <summary>
         /// Gets the FontDescriptor identified by the specified XFont. If no such object 
@@ -87,7 +87,7 @@ namespace PdfSharp.Fonts
             finally { Locks.ExitFontFactory(); }
         }
 
-        public static void Reset()
+        internal static void Reset()
         {
             Globals.Global.Fonts.FontDescriptorCache.Clear();
         }

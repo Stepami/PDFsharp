@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\shared\src\PdfSharp.Quality\PdfSharp.Quality.csproj" />
       <ProjectReference Include="..\PdfSharp\PdfSharp.csproj" SetTargetFramework="TargetFramework=net8.0" />
     </ItemGroup>
 

@@ -2,52 +2,41 @@
 using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
-using PdfSharp.Drawing;
+using PdfSharp.Benchmarks;
 using PdfSharp.Fonts;
+using PdfSharp.Quality;
 
-BenchmarkRunner.Run<FontCacheBenchmarks>();
+/*
+GlobalFontSettings.FontResolver = new SamplesFontResolver();
+var document = CreateSampleDocument();
+var filename = PdfFileUtility.GetTempPdfFullFileName("samples/HelloWorldSample");
+await document.SaveAsync(filename);
+// ...and start a viewer.
+PdfFileUtility.ShowDocument(filename);
+*/
+
+BenchmarkRunner.Run<PdfDocumentBenchmarks>();
 
 [SimpleJob(RuntimeMoniker.Net80)]
-public class FontCacheBenchmarks
+public class PdfDocumentBenchmarks
 {
-    private static readonly XGlyphTypeface GlyphTypeface = new(
-        XFontSource.CreateFromFile(@"C:\Windows\Fonts\arial.ttf"));
     private static readonly Consumer Consumer = new();
 
     [Params(1, 10, 100)]
     public int Iterations { get; set; }
 
-    [GlobalSetup]
-    public void GlobalSetup()
-    {
-        FontDescriptorCache.Reset();
-        FontDescriptorCacheV2.Reset();
-    }
-
-    [GlobalCleanup]
-    public void GlobalCleanup()
-    {
-        FontDescriptorCache.Reset();
-        FontDescriptorCacheV2.Reset();
-    }
-
-    [Benchmark(Baseline = true)]
-    public void LockFactory()
-    {
-        for (var i = 0; i < Iterations; i++)
-        {
-            Consumer.Consume(
-                FontDescriptorCache.GetOrCreateDescriptorFor(GlyphTypeface));
-        }
-    }
-
     [Benchmark]
-    public void ConcurrentDictionary()
+    public async Task CreateAndSave()
     {
         for (var i = 0; i < Iterations; i++)
         {
-            Consumer.Consume(
-                FontDescriptorCacheV2.GetOrCreateDescriptorFor(GlyphTypeface));
+            var document = BenchmarkHelper.CreateSampleDocument();
+            Consumer.Consume(document);
+            await document.SaveAsync(Stream.Null);
         }
     }
+
+    [GlobalSetup]
+    public void GlobalSetup() =>
+        GlobalFontSettings.FontResolver = new SamplesFontResolver();
 }
