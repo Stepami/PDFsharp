@@ -8,7 +8,7 @@ using PdfSharp.Quality;
 
 /*
 GlobalFontSettings.FontResolver = new SamplesFontResolver();
-var document = CreateSampleDocument();
+var document = BenchmarkHelper.CreateSampleDocument();
 var filename = PdfFileUtility.GetTempPdfFullFileName("samples/HelloWorldSample");
 await document.SaveAsync(filename);
 // ...and start a viewer.
