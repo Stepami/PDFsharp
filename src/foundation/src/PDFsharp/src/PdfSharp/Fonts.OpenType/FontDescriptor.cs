@@ -22,7 +22,7 @@ namespace PdfSharp.Fonts.OpenType
     /// Base class for all font descriptors.
     /// Currently only OpenTypeDescriptor is derived from this base class.
     /// </summary>
-    class FontDescriptor
+    public class FontDescriptor
     {
         protected FontDescriptor(string key)
         {
