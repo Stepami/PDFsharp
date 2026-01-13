@@ -93,9 +93,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!--<PackageReference Update="GitVersion.MsBuild">
+        <PackageReference Update="GitVersion.MsBuild">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>-->
+        </PackageReference>
     </ItemGroup>
 </Project>
